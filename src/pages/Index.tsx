@@ -7,20 +7,26 @@ import Footer from "@/components/Footer";
 
 export default function Index() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#F5F7FA] font-sans">
+    <div className="min-h-screen flex flex-col bg-white font-roboto">
       <Header />
-      <main className="flex-1 xl:container w-full px-2 xl:px-20 mt-12 xl:mt-24 md:mt-14 flex flex-col">
-        {/* Main metrics section */}
+      <main className="flex-1 w-full page-container flex flex-col items-center justify-center pt-[50px] md:pt-[30px]">
+        {/* Основные метрики */}
         <div
-          className="flex xl:flex-row flex-col w-full items-stretch xl:items-end xl:gap-8 justify-start xl:mb-10 mb-4 fade-in"
+          className={`
+            flex w-full
+            xl:flex-row flex-col xl:justify-center items-stretch
+            xl:gap-blockGapDesktop md:gap-blockGapMobile gap-blockGapMobile
+          `}
         >
-          <MainMetrics />
-          <AccentMetric />
+          <div className="flex-1 flex justify-end xl:justify-end md:justify-center">
+            <MainMetrics />
+          </div>
+          <div className="flex-1 flex xl:justify-start justify-center mt-0 md:mt-blockGapMobile xl:mt-0">
+            <AccentMetric />
+          </div>
         </div>
-        {/* Group metrics */}
-        <div className="flex w-full justify-center">
-          <GroupMetrics />
-        </div>
+        {/* Группа показателей */}
+        <GroupMetrics />
       </main>
       <Footer />
     </div>

@@ -2,20 +2,29 @@
 export default function MainMetrics() {
   return (
     <section
-      className="flex flex-col justify-center fade-in 
-        bg-white border border-gray-200 shadow-soft rounded-2xl
-        px-8 xl:px-16 py-10 mb-8 w-full 
-        xl:w-[40%] lg:w-[42%] mx-auto xl:mx-0 
-        xl:items-start items-center"
-      style={{ minHeight: 220 }}
+      className={`
+        flex flex-col items-center justify-center
+        bg-white rounded-xl fade-in
+        py-[40px] md:py-[20px]
+        min-w-[270px]
+        shadow-soft border border-border-gray
+        w-full
+      `}
+      style={{ minHeight: 170, maxWidth: 400 }}
     >
       <div
-        className="font-bold text-metric-desktop md:text-metric-mobile text-gray-900 mb-3"
+        className={`
+          font-roboto font-bold text-metricDesktop md:text-metricMobile
+          text-main-gray mb-2 tracking-tight
+          flex items-baseline
+        `}
         style={{ letterSpacing: "-2px" }}
       >
-        60%
+        60<span className="text-metricDesktop md:text-metricMobile align-top ml-1 font-roboto font-bold" style={{ fontSize: "0.7em" }}>%</span>
       </div>
-      <div className="text-lg text-gray-500 font-medium">Эффективность</div>
+      <div className="text-groupLabel font-roboto font-normal text-secondary-gray">
+        Успешных кейсов
+      </div>
     </section>
   );
 }

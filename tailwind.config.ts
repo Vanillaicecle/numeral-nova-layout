@@ -11,41 +11,47 @@ export default {
   ],
   theme: {
     fontFamily: {
-      'sans': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      sans: ['Roboto', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      roboto: ['Roboto', 'ui-sans-serif', 'system-ui', 'sans-serif'],
     },
     screens: {
-      'xl': '1920px',
-      'lg': '1440px',
-      'md': '768px',
-      'sm': '480px'
+      xl: "1920px",
+      lg: "1440px",
+      md: "768px",
+      sm: "480px"
     },
     extend: {
       colors: {
-        accent: {
-          DEFAULT: '#33C3F0',
-          light: '#D3E4FD'
-        },
-        faded: "#F5F7FA",
+        accent: "#2563EB",
+        "main-gray": "#333333",
+        "secondary-gray": "#666666",
+        "border-gray": "#DDDDDD",
+        "block-blue": "#F0F9FF",
+        "block-green": "#D1FAE5",
+        "green-dark": "#065F46",
       },
       boxShadow: {
-        'soft': '0 4px 24px 0 rgba(40, 60, 90, 0.08)',
+        soft: "0 2px 8px 0 rgba(0,0,0,0.05)",
       },
       borderRadius: {
-        "xl": "1.5rem",
+        "lg": "12px",
+        "circle": "1000px",
       },
       fontSize: {
-        'metric-desktop': ['72px', '1.1'],
-        'metric-mobile': ['48px', '1.15'],
+        metricDesktop: ["72px", "1.1"],
+        metricMobile: ["48px", "1.15"],
+        accentDesktop: ["64px", "1.1"],
+        accentMobile: ["40px", "1.15"],
+        groupMetric: ["36px", "1.15"],
+        groupLabel: ["16px", "1.25"],
       },
-      keyframes: {
-        "fade-in": {
-          "0%": { opacity: "0", transform: "translateY(20px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
+      spacing: {
+        blockGapDesktop: "60px",
+        blockGapMobile: "30px",
       },
-      animation: {
-        "fade-in": "fade-in 0.8s cubic-bezier(0.25,0.1,0.25,1) forwards",
-      },
+      maxWidth: {
+        content: "1200px",
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],
