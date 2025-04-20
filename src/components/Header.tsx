@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import {
   DropdownMenu,
@@ -7,6 +6,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Menu, ShoppingCart, Search, Heart, TreeDeciduous } from "lucide-react";
+import GardenHomeToggle from "./GardenHomeToggle";
 
 const navLinks = [
   { name: "Главная", href: "#" },
@@ -28,10 +28,14 @@ export default function Header() {
   return (
     <header className="w-full bg-[#F8F8F8] border-b border-border-gray shadow-soft sticky top-0 z-40">
       <div className="max-w-content mx-auto flex items-center justify-between px-5 py-4 md:py-6">
-        {/* Логотип */}
+        {/* Логотип + Переключатель */}
         <div className="flex items-center gap-2 md:gap-3">
           <TreeDeciduous className="text-[#2E8B57]" size={32} />
-          <span className="font-bold text-2xl text-[#2E8B57] tracking-tight select-none">GreenHome</span>
+          <span className="font-bold text-2xl text-[#2E8B57] tracking-tight select-none">
+            GreenHome
+          </span>
+          {/* Тумблер сад/дом */}
+          <GardenHomeToggle />
         </div>
 
         {/* Навигация (Desktop) */}
