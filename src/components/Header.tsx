@@ -32,7 +32,7 @@ export default function Header() {
         <div className="flex items-center gap-2 md:gap-3">
           <TreeDeciduous className="text-[#2E8B57]" size={32} />
           <span className="font-bold text-2xl text-[#2E8B57] tracking-tight select-none">
-            GreenHome
+            Дебют
           </span>
           {/* Тумблер сад/дом */}
           <GardenHomeToggle />
