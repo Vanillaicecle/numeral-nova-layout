@@ -1,15 +1,16 @@
-
 import Header from "@/components/Header";
 import MainMetrics from "@/components/MainMetrics";
 import AccentMetric from "@/components/AccentMetric";
 import GroupMetrics from "@/components/GroupMetrics";
 import Footer from "@/components/Footer";
+import HeroSection from "@/components/HeroSection";
 
 export default function Index() {
   return (
     <div className="min-h-screen flex flex-col bg-white font-roboto">
       <Header />
       <main className="flex-1 w-full page-container flex flex-col items-center justify-center pt-[50px] md:pt-[30px]">
+        <HeroSection />
         {/* Основные метрики */}
         <div
           className={`
