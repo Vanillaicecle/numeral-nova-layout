@@ -19,7 +19,6 @@ const navLinks = [
     ],
   },
   { name: "О нас", href: "#" },
-  { name: "Акции", href: "#" },
   { name: "Контакты", href: "#" },
 ];
 
@@ -30,13 +29,13 @@ export default function Header() {
     <header className="w-full bg-[#F8F8F8] border-b border-border-gray shadow-soft sticky top-0 z-40">
       <div className="max-w-content mx-auto flex items-center justify-between px-5 py-4 md:py-6">
         {/* Логотип */}
-        <div className="flex items-center gap-2 md:gap-3 flex-1">
+        <div className="flex items-center gap-2 md:gap-3">
           <TreeDeciduous className="text-[#2E8B57]" size={32} />
           <span className="font-bold text-2xl text-[#2E8B57] tracking-tight select-none">GreenHome</span>
         </div>
 
         {/* Навигация (Desktop) */}
-        <nav className="hidden md:flex flex-1 justify-center gap-2 xl:gap-7">
+        <nav className="hidden md:flex justify-center gap-2 xl:gap-7">
           {navLinks.map((link) =>
             link.submenu ? (
               <DropdownMenu key={link.name}>
@@ -67,7 +66,7 @@ export default function Header() {
         </nav>
 
         {/* Иконки */}
-        <div className="hidden md:flex flex-1 justify-end gap-4">
+        <div className="hidden md:flex justify-end gap-4">
           <button aria-label="Поиск" className="hover:text-[#2E8B57] transition">
             <Search size={26} />
           </button>
