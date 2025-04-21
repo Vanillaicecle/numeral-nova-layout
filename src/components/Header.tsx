@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import {
   DropdownMenu,
@@ -26,12 +27,12 @@ export default function Header() {
   const [mobileMenu, setMobileMenu] = useState(false);
 
   return (
-    <header className="w-full bg-[#F8F8F8] border-b border-border-gray shadow-soft sticky top-0 z-40">
+    <header className="w-full bg-bg-light border-b border-border-gray shadow-soft sticky top-0 z-40">
       <div className="max-w-content mx-auto flex items-center justify-between px-5 py-4 md:py-6">
         {/* Логотип + Переключатель */}
         <div className="flex items-center gap-2 md:gap-3">
-          <TreeDeciduous className="text-[#2E8B57]" size={32} />
-          <span className="font-bold text-2xl text-[#2E8B57] tracking-tight select-none">
+          <TreeDeciduous className="text-main-green" size={32} />
+          <span className="font-playfair font-bold text-2xl text-main-green tracking-tight select-none">
             Дебют
           </span>
           {/* Тумблер сад/дом */}
@@ -49,7 +50,7 @@ export default function Header() {
                     <DropdownMenuItem asChild key={item.label}>
                       <a
                         href={item.href}
-                        className="block px-4 py-2 text-[#2E8B57] font-normal hover:bg-[#F8F8F8] transition"
+                        className="block px-4 py-2 text-main-green font-normal hover:bg-bg-light transition"
                       >
                         {item.label}
                       </a>
@@ -71,13 +72,13 @@ export default function Header() {
 
         {/* Иконки */}
         <div className="hidden md:flex justify-end gap-4">
-          <button aria-label="Поиск" className="hover:text-[#2E8B57] transition">
+          <button aria-label="Поиск" className="hover:text-main-green transition">
             <Search size={26} />
           </button>
-          <button aria-label="Избранное" className="hover:text-[#2E8B57] transition">
+          <button aria-label="Избранное" className="hover:text-main-green transition">
             <Heart size={26} />
           </button>
-          <button aria-label="Корзина" className="hover:text-[#2E8B57] transition">
+          <button aria-label="Корзина" className="hover:text-main-green transition">
             <ShoppingCart size={26} />
           </button>
         </div>
@@ -88,12 +89,12 @@ export default function Header() {
           aria-label="Открыть меню"
           onClick={() => setMobileMenu((v) => !v)}
         >
-          <Menu size={32} className="text-[#2E8B57]" />
+          <Menu size={32} className="text-main-green" />
         </button>
       </div>
       {/* Mobile меню */}
       {mobileMenu && (
-        <div className="md:hidden absolute left-0 top-[100%] w-full bg-[#F8F8F8] shadow-lg z-30 animate-fade-in flex flex-col py-4">
+        <div className="md:hidden absolute left-0 top-[100%] w-full bg-bg-light shadow-lg z-30 animate-fade-in flex flex-col py-4">
           {navLinks.map((link) =>
             link.submenu ? (
               <DropdownMenu key={link.name}>
@@ -105,7 +106,7 @@ export default function Header() {
                     <DropdownMenuItem asChild key={item.label}>
                       <a
                         href={item.href}
-                        className="block px-4 py-2 text-[#2E8B57] font-normal hover:bg-[#F8F8F8] transition"
+                        className="block px-4 py-2 text-main-green font-normal hover:bg-bg-light transition"
                         onClick={() => setMobileMenu(false)}
                       >
                         {item.label}
@@ -127,13 +128,13 @@ export default function Header() {
           )}
           {/* Иконки (mobile) */}
           <div className="flex gap-6 justify-center mt-4">
-            <button aria-label="Поиск" className="hover:text-[#2E8B57]">
+            <button aria-label="Поиск" className="hover:text-main-green">
               <Search size={26} />
             </button>
-            <button aria-label="Избранное" className="hover:text-[#2E8B57]">
+            <button aria-label="Избранное" className="hover:text-main-green">
               <Heart size={26} />
             </button>
-            <button aria-label="Корзина" className="hover:text-[#2E8B57]">
+            <button aria-label="Корзина" className="hover:text-main-green">
               <ShoppingCart size={26} />
             </button>
           </div>

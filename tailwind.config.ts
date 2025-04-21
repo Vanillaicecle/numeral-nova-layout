@@ -13,6 +13,7 @@ export default {
     fontFamily: {
       sans: ['Roboto', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       roboto: ['Roboto', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      playfair: ['Playfair Display', 'serif'],
     },
     screens: {
       xl: "1920px",
@@ -29,6 +30,8 @@ export default {
         "block-blue": "#F0F9FF",
         "block-green": "#D1FAE5",
         "green-dark": "#065F46",
+        "main-green": "#2E8B57",
+        "bg-light": "#F8F8F8"
       },
       boxShadow: {
         soft: "0 2px 8px 0 rgba(0,0,0,0.05)",

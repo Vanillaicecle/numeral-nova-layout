@@ -53,7 +53,7 @@ export default function GardenHomeToggle({
             transition
             ${
               selected === option.value
-                ? "bg-[#2E8B57] text-white shadow"
+                ? "bg-main-green text-white shadow"
                 : "bg-transparent text-[#333] hover:bg-[#e0eee7]"
             }
           `}

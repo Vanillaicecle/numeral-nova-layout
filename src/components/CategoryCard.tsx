@@ -23,10 +23,10 @@ export default function CategoryCard({
         style={{ backgroundImage: `url(${imageUrl})` }}
       />
       <CardContent className="flex flex-col justify-between p-5 flex-grow">
-        <h3 className="text-xl font-bold text-main-gray mb-4">{title}</h3>
+        <h3 className="text-xl font-playfair font-bold text-main-gray mb-4">{title}</h3>
         <a 
           href={href}
-          className="inline-flex items-center justify-between gap-2 whitespace-nowrap rounded-md bg-[#2E8B57] hover:bg-[#21794d] text-white w-full h-10 px-4 py-2 text-sm font-medium transition-colors"
+          className="inline-flex items-center justify-between gap-2 whitespace-nowrap rounded-md bg-main-green hover:bg-[#21794d] text-white w-full h-10 px-4 py-2 text-sm font-medium transition-colors"
         >
           {buttonText}
           <ChevronRight size={18} />

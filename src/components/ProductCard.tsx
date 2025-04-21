@@ -65,7 +65,7 @@ export default function ProductCard({
         
         <Button
           onClick={handleAddToCart}
-          className="w-full bg-[#2E8B57] hover:bg-[#21794d] text-white"
+          className="w-full bg-main-green hover:bg-[#21794d] text-white"
         >
           <ShoppingCart size={18} className="mr-2" />
           В корзину

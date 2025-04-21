@@ -17,7 +17,7 @@ export default function HeroSection() {
       }}
     >
       <div className="relative z-10 flex flex-col items-center text-center px-6 py-12 w-full">
-        <h1 className="font-bold text-gray-900 text-3xl md:text-5xl lg:text-6xl mb-4 drop-shadow-lg">
+        <h1 className="font-playfair font-bold text-gray-900 text-3xl md:text-5xl lg:text-6xl mb-4 drop-shadow-lg">
           Создайте уют в каждом уголке вашего дома и сада
         </h1>
         <p className="text-lg md:text-2xl text-gray-700 font-medium mb-8 drop-shadow-md">
@@ -26,7 +26,7 @@ export default function HeroSection() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button
             size="lg"
-            className="bg-[#2E8B57] hover:bg-[#21794d] text-white font-semibold text-base md:text-lg px-8 py-3 shadow-lg transition"
+            className="bg-main-green hover:bg-[#21794d] text-white font-semibold text-base md:text-lg px-8 py-3 shadow-lg transition"
           >
             В каталог
             <ArrowRight size={20} className="ml-2" />
@@ -34,7 +34,7 @@ export default function HeroSection() {
           <Button
             size="lg"
             variant="outline"
-            className="border-2 border-[#2E8B57] text-[#2E8B57] bg-white font-semibold text-base md:text-lg px-8 py-3 hover:bg-[#e0eee7] transition shadow"
+            className="border-2 border-main-green text-main-green bg-white font-semibold text-base md:text-lg px-8 py-3 hover:bg-[#e0eee7] transition shadow"
           >
             Смотреть акции
             <Tag size={18} className="ml-2" />
