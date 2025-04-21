@@ -24,14 +24,13 @@ export default function CategoryCard({
       />
       <CardContent className="flex flex-col justify-between p-5 flex-grow">
         <h3 className="text-xl font-bold text-main-gray mb-4">{title}</h3>
-        <Button
-          as="a"
+        <a 
           href={href}
-          className="mt-auto bg-[#2E8B57] hover:bg-[#21794d] text-white w-full justify-between"
+          className="inline-flex items-center justify-between gap-2 whitespace-nowrap rounded-md bg-[#2E8B57] hover:bg-[#21794d] text-white w-full h-10 px-4 py-2 text-sm font-medium transition-colors"
         >
           {buttonText}
           <ChevronRight size={18} />
-        </Button>
+        </a>
       </CardContent>
     </Card>
   );

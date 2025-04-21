@@ -6,6 +6,7 @@ import GroupMetrics from "@/components/GroupMetrics";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import MainCategories from "@/components/MainCategories";
+import PopularProducts from "@/components/PopularProducts";
 
 export default function Index() {
   return (
@@ -16,6 +17,9 @@ export default function Index() {
         
         {/* Основные категории */}
         <MainCategories />
+        
+        {/* Популярные товары */}
+        <PopularProducts />
         
         {/* Основные метрики */}
         <div
