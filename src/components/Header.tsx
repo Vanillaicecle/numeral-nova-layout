@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -18,14 +18,15 @@ const navLinks = [
   { name: "Главная", href: "/" },
   {
     name: "Каталог",
+    href: "/category/home", // Set default category link
     submenu: [
-      { label: "Дом", href: "#" },
-      { label: "Сад", href: "#" },
-      { label: "Дача", href: "#" },
+      { label: "Дом", href: "/category/home" },
+      { label: "Сад", href: "/category/garden" },
+      { label: "Дача", href: "/category/dacha" },
     ],
   },
-  { name: "О нас", href: "#" },
-  { name: "Контакты", href: "#" },
+  { name: "О нас", href: "/about" },
+  { name: "Контакты", href: "/contact" },
 ];
 
 export default function Header() {
@@ -33,6 +34,13 @@ export default function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
+  
+  const [selectedCategory, setSelectedCategory] = useState<"garden" | "home">("garden");
+  
+  const handleCategoryChange = (value: "garden" | "home") => {
+    setSelectedCategory(value);
+  };
 
   return (
     <header className="w-full bg-bg-light border-b border-border-gray shadow-soft sticky top-0 z-40">
@@ -50,16 +58,21 @@ export default function Header() {
           {navLinks.map((link) =>
             link.submenu ? (
               <DropdownMenu key={link.name}>
-                <DropdownMenuTrigger className="bg-transparent px-3 py-2 rounded-md transition font-medium text-[#333] hover:bg-[#e0eee7]">{link.name}</DropdownMenuTrigger>
+                <DropdownMenuTrigger 
+                  className="bg-transparent px-3 py-2 rounded-md transition font-medium text-[#333] hover:bg-[#e0eee7]"
+                  onClick={() => navigate(link.href)}
+                >
+                  {link.name}
+                </DropdownMenuTrigger>
                 <DropdownMenuContent className="bg-white min-w-[140px] border border-gray-200 shadow-lg">
                   {link.submenu.map((item) => (
                     <DropdownMenuItem asChild key={item.label}>
-                      <a
-                        href={item.href}
+                      <Link
+                        to={item.href}
                         className="block px-4 py-2 text-main-green font-normal hover:bg-bg-light transition"
                       >
                         {item.label}
-                      </a>
+                      </Link>
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
@@ -75,6 +88,14 @@ export default function Header() {
             )
           )}
         </nav>
+
+        {/* Garden/Home Toggle (Desktop) */}
+        {!isMobile && (
+          <GardenHomeToggle 
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+          />
+        )}
 
         {/* Иконки (для десктопа и мобильной версии) */}
         <div className="flex justify-end gap-4">
@@ -118,7 +139,10 @@ export default function Header() {
       {/* Тумблер сад/дом (мобильная версия - всегда показан) */}
       {isMobile && (
         <div className="px-5 py-3 flex justify-center">
-          <GardenHomeToggle />
+          <GardenHomeToggle 
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+          />
         </div>
       )}
       
@@ -128,19 +152,25 @@ export default function Header() {
           {navLinks.map((link) =>
             link.submenu ? (
               <DropdownMenu key={link.name}>
-                <DropdownMenuTrigger className="bg-transparent w-full text-left px-6 py-3 font-semibold text-[#333]">
+                <DropdownMenuTrigger 
+                  className="bg-transparent w-full text-left px-6 py-3 font-semibold text-[#333]"
+                  onClick={() => {
+                    navigate(link.href);
+                    setMobileMenu(false);
+                  }}
+                >
                   {link.name}
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="bg-white ml-6 border border-gray-200">
                   {link.submenu.map((item) => (
                     <DropdownMenuItem asChild key={item.label}>
-                      <a
-                        href={item.href}
+                      <Link
+                        to={item.href}
                         className="block px-4 py-2 text-main-green font-normal hover:bg-bg-light transition"
                         onClick={() => setMobileMenu(false)}
                       >
                         {item.label}
-                      </a>
+                      </Link>
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
@@ -156,8 +186,6 @@ export default function Header() {
               </Link>
             )
           )}
-
-          {/* Тумблер сад/дом в меню теперь не нужен, так как он всегда показан */}
         </div>
       )}
       

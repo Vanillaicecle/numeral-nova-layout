@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Tag } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const bgUrl =
   "https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=1200&q=80";
@@ -27,17 +28,23 @@ export default function HeroSection() {
           <Button
             size="lg"
             className="bg-main-green hover:bg-[#21794d] text-white font-semibold text-base md:text-lg px-8 py-3 shadow-lg transition"
+            asChild
           >
-            В каталог
-            <ArrowRight size={20} className="ml-2" />
+            <Link to="/category/home">
+              В каталог
+              <ArrowRight size={20} className="ml-2" />
+            </Link>
           </Button>
           <Button
             size="lg"
             variant="outline"
             className="border-2 border-main-green text-main-green bg-white font-semibold text-base md:text-lg px-8 py-3 hover:bg-[#e0eee7] transition shadow"
+            asChild
           >
-            Смотреть акции
-            <Tag size={18} className="ml-2" />
+            <Link to="/promotions">
+              Смотреть акции
+              <Tag size={18} className="ml-2" />
+            </Link>
           </Button>
         </div>
       </div>
