@@ -1,16 +1,20 @@
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Menu, ShoppingCart, Search, Heart, TreeDeciduous } from "lucide-react";
+import { Menu, ShoppingCart, Search, Heart, TreeDeciduous, User } from "lucide-react";
 import GardenHomeToggle from "./GardenHomeToggle";
+import SearchDialog from "./SearchDialog";
+import FavoritesDrawer from "./FavoritesDrawer";
+import AuthDialog from "./AuthDialog";
 
 const navLinks = [
-  { name: "Главная", href: "#" },
+  { name: "Главная", href: "/" },
   {
     name: "Каталог",
     submenu: [
@@ -25,6 +29,8 @@ const navLinks = [
 
 export default function Header() {
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
 
   return (
     <header className="w-full bg-bg-light border-b border-border-gray shadow-soft sticky top-0 z-40">
@@ -32,9 +38,9 @@ export default function Header() {
         {/* Логотип + Переключатель */}
         <div className="flex items-center gap-2 md:gap-3">
           <TreeDeciduous className="text-main-green" size={32} />
-          <span className="font-playfair font-bold text-2xl text-main-green tracking-tight select-none">
+          <Link to="/" className="font-playfair font-bold text-2xl text-main-green tracking-tight select-none">
             Дебют
-          </span>
+          </Link>
           {/* Тумблер сад/дом */}
           <GardenHomeToggle />
         </div>
@@ -59,27 +65,43 @@ export default function Header() {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
+                to={link.href}
                 className="px-3 py-2 font-medium rounded-md text-[#333] hover:bg-[#e0eee7] transition"
               >
                 {link.name}
-              </a>
+              </Link>
             )
           )}
         </nav>
 
         {/* Иконки */}
         <div className="hidden md:flex justify-end gap-4">
-          <button aria-label="Поиск" className="hover:text-main-green transition">
+          <button 
+            aria-label="Поиск" 
+            className="hover:text-main-green transition"
+            onClick={() => setSearchOpen(true)}
+          >
             <Search size={26} />
           </button>
-          <button aria-label="Избранное" className="hover:text-main-green transition">
-            <Heart size={26} />
-          </button>
-          <button aria-label="Корзина" className="hover:text-main-green transition">
+          
+          <FavoritesDrawer>
+            <button aria-label="Избранное" className="hover:text-main-green transition">
+              <Heart size={26} />
+            </button>
+          </FavoritesDrawer>
+          
+          <Link to="/cart" aria-label="Корзина" className="hover:text-main-green transition">
             <ShoppingCart size={26} />
+          </Link>
+          
+          <button 
+            aria-label="Личный кабинет" 
+            className="hover:text-main-green transition"
+            onClick={() => setAuthOpen(true)}
+          >
+            <User size={26} />
           </button>
         </div>
 
@@ -92,6 +114,7 @@ export default function Header() {
           <Menu size={32} className="text-main-green" />
         </button>
       </div>
+      
       {/* Mobile меню */}
       {mobileMenu && (
         <div className="md:hidden absolute left-0 top-[100%] w-full bg-bg-light shadow-lg z-30 animate-fade-in flex flex-col py-4">
@@ -116,30 +139,67 @@ export default function Header() {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
+                to={link.href}
                 className="px-6 py-3 text-[#333] font-semibold"
                 onClick={() => setMobileMenu(false)}
               >
                 {link.name}
-              </a>
+              </Link>
             )
           )}
           {/* Иконки (mobile) */}
           <div className="flex gap-6 justify-center mt-4">
-            <button aria-label="Поиск" className="hover:text-main-green">
+            <button 
+              aria-label="Поиск" 
+              className="hover:text-main-green"
+              onClick={() => {
+                setSearchOpen(true);
+                setMobileMenu(false);
+              }}
+            >
               <Search size={26} />
             </button>
-            <button aria-label="Избранное" className="hover:text-main-green">
-              <Heart size={26} />
-            </button>
-            <button aria-label="Корзина" className="hover:text-main-green">
+            
+            <FavoritesDrawer>
+              <button 
+                aria-label="Избранное" 
+                className="hover:text-main-green"
+                onClick={() => setMobileMenu(false)}
+              >
+                <Heart size={26} />
+              </button>
+            </FavoritesDrawer>
+            
+            <Link 
+              to="/cart" 
+              aria-label="Корзина" 
+              className="hover:text-main-green"
+              onClick={() => setMobileMenu(false)}
+            >
               <ShoppingCart size={26} />
+            </Link>
+            
+            <button 
+              aria-label="Личный кабинет" 
+              className="hover:text-main-green"
+              onClick={() => {
+                setAuthOpen(true);
+                setMobileMenu(false);
+              }}
+            >
+              <User size={26} />
             </button>
           </div>
         </div>
       )}
+      
+      {/* Search Dialog */}
+      <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
+      
+      {/* Auth Dialog */}
+      <AuthDialog open={authOpen} onOpenChange={setAuthOpen} />
     </header>
   );
 }
