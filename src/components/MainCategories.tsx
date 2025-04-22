@@ -1,4 +1,5 @@
 
+import { useNavigate } from "react-router-dom";
 import CategoryCard from "./CategoryCard";
 
 const categories = [
@@ -26,6 +27,12 @@ const categories = [
 ];
 
 export default function MainCategories() {
+  const navigate = useNavigate();
+  
+  const handleCategoryClick = (href: string) => {
+    navigate(href);
+  };
+  
   return (
     <section className="w-full py-10">
       <h2 className="text-3xl font-bold text-main-gray mb-8 text-center font-playfair">Основные категории</h2>
@@ -37,9 +44,12 @@ export default function MainCategories() {
             buttonText={category.buttonText}
             imageUrl={category.imageUrl}
             href={category.href}
+            onClick={() => handleCategoryClick(category.href)}
           />
         ))}
       </div>
     </section>
   );
 }
+
+export { categories };

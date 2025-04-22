@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import MainCategories from "@/components/MainCategories";
-import PopularProducts from "@/components/PopularProducts";
+import SeasonalCollection from "@/components/SeasonalCollection";
 import CompanyAdvantages from "@/components/CompanyAdvantages";
 
 export default function Index() {
@@ -17,8 +17,8 @@ export default function Index() {
           {/* Основные категории */}
           <MainCategories />
           
-          {/* Популярные товары */}
-          <PopularProducts />
+          {/* Сезонная подборка */}
+          <SeasonalCollection />
         </div>
         
         {/* Преимущества компании */}

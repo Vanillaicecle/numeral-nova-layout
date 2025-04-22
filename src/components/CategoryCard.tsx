@@ -8,6 +8,7 @@ interface CategoryCardProps {
   buttonText: string;
   imageUrl: string;
   href: string;
+  onClick?: () => void;
 }
 
 export default function CategoryCard({
@@ -15,6 +16,7 @@ export default function CategoryCard({
   buttonText,
   imageUrl,
   href,
+  onClick,
 }: CategoryCardProps) {
   return (
     <Card className="overflow-hidden border border-border-gray hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
@@ -24,13 +26,13 @@ export default function CategoryCard({
       />
       <CardContent className="flex flex-col justify-between p-5 flex-grow">
         <h3 className="text-xl font-playfair font-bold text-main-gray mb-4">{title}</h3>
-        <a 
-          href={href}
+        <Button 
+          onClick={onClick}
           className="inline-flex items-center justify-between gap-2 whitespace-nowrap rounded-md bg-main-green hover:bg-[#21794d] text-white w-full h-10 px-4 py-2 text-sm font-medium transition-colors"
         >
           {buttonText}
           <ChevronRight size={18} />
-        </a>
+        </Button>
       </CardContent>
     </Card>
   );
