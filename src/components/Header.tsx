@@ -12,6 +12,7 @@ import GardenHomeToggle from "./GardenHomeToggle";
 import SearchDialog from "./SearchDialog";
 import FavoritesDrawer from "./FavoritesDrawer";
 import AuthDialog from "./AuthDialog";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const navLinks = [
   { name: "Главная", href: "/" },
@@ -31,18 +32,17 @@ export default function Header() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   return (
     <header className="w-full bg-bg-light border-b border-border-gray shadow-soft sticky top-0 z-40">
       <div className="max-w-content mx-auto flex items-center justify-between px-5 py-4 md:py-6">
-        {/* Логотип + Переключатель */}
+        {/* Логотип */}
         <div className="flex items-center gap-2 md:gap-3">
           <TreeDeciduous className="text-main-green" size={32} />
           <Link to="/" className="font-playfair font-bold text-2xl text-main-green tracking-tight select-none">
             Дебют
           </Link>
-          {/* Тумблер сад/дом */}
-          <GardenHomeToggle />
         </div>
 
         {/* Навигация (Desktop) */}
@@ -76,8 +76,8 @@ export default function Header() {
           )}
         </nav>
 
-        {/* Иконки */}
-        <div className="hidden md:flex justify-end gap-4">
+        {/* Иконки (для десктопа и мобильной версии) */}
+        <div className="flex justify-end gap-4">
           <button 
             aria-label="Поиск" 
             className="hover:text-main-green transition"
@@ -103,17 +103,24 @@ export default function Header() {
           >
             <User size={26} />
           </button>
+          
+          {/* Гамбургер меню (только на мобильных) */}
+          <button
+            className="md:hidden flex items-center justify-center ml-2"
+            aria-label="Открыть меню"
+            onClick={() => setMobileMenu((v) => !v)}
+          >
+            <Menu size={32} />
+          </button>
         </div>
-
-        {/* Гамбургер (mobile) */}
-        <button
-          className="md:hidden flex items-center justify-center"
-          aria-label="Открыть меню"
-          onClick={() => setMobileMenu((v) => !v)}
-        >
-          <Menu size={32} className="text-main-green" />
-        </button>
       </div>
+
+      {/* Тумблер сад/дом (мобильная версия - всегда показан) */}
+      {isMobile && (
+        <div className="px-5 py-3 flex justify-center">
+          <GardenHomeToggle />
+        </div>
+      )}
       
       {/* Mobile меню */}
       {mobileMenu && (
@@ -149,49 +156,8 @@ export default function Header() {
               </Link>
             )
           )}
-          {/* Иконки (mobile) */}
-          <div className="flex gap-6 justify-center mt-4">
-            <button 
-              aria-label="Поиск" 
-              className="hover:text-main-green"
-              onClick={() => {
-                setSearchOpen(true);
-                setMobileMenu(false);
-              }}
-            >
-              <Search size={26} />
-            </button>
-            
-            <FavoritesDrawer>
-              <button 
-                aria-label="Избранное" 
-                className="hover:text-main-green"
-                onClick={() => setMobileMenu(false)}
-              >
-                <Heart size={26} />
-              </button>
-            </FavoritesDrawer>
-            
-            <Link 
-              to="/cart" 
-              aria-label="Корзина" 
-              className="hover:text-main-green"
-              onClick={() => setMobileMenu(false)}
-            >
-              <ShoppingCart size={26} />
-            </Link>
-            
-            <button 
-              aria-label="Личный кабинет" 
-              className="hover:text-main-green"
-              onClick={() => {
-                setAuthOpen(true);
-                setMobileMenu(false);
-              }}
-            >
-              <User size={26} />
-            </button>
-          </div>
+
+          {/* Тумблер сад/дом в меню теперь не нужен, так как он всегда показан */}
         </div>
       )}
       

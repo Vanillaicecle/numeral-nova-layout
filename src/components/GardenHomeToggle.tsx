@@ -1,7 +1,8 @@
 
 import React from "react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { TreeDeciduous, House } from "lucide-react";
+import { TreeDeciduous, Home } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type GardenHomeToggleProps = {
   value?: "garden" | "home";
@@ -17,7 +18,7 @@ const options = [
   {
     value: "home",
     label: "Дом",
-    icon: <House className="mr-2" size={22} />,
+    icon: <Home className="mr-2" size={22} />,
   },
 ];
 
@@ -26,6 +27,7 @@ export default function GardenHomeToggle({
   onChange,
 }: GardenHomeToggleProps) {
   const [selected, setSelected] = React.useState<"garden" | "home">(value);
+  const isMobile = useIsMobile();
 
   function handleValueChange(val: string) {
     if (val === "garden" || val === "home") {
@@ -39,7 +41,10 @@ export default function GardenHomeToggle({
       type="single"
       value={selected}
       onValueChange={handleValueChange}
-      className="rounded-full p-1 bg-[#F4F4F4] shadow-sm ml-5"
+      className={`
+        rounded-full p-1 bg-[#F4F4F4] shadow-sm 
+        ${isMobile ? "w-full max-w-[320px]" : "ml-5"}
+      `}
       aria-label="Выбрать сад или дом"
     >
       {options.map((option) => (
@@ -48,8 +53,8 @@ export default function GardenHomeToggle({
           value={option.value}
           aria-label={option.label}
           className={`
-            flex items-center rounded-full px-4 py-2 min-w-[115px] justify-center gap-2
-            text-base font-medium
+            flex items-center rounded-full py-2 justify-center gap-2
+            text-base font-medium w-1/2
             transition
             ${
               selected === option.value
