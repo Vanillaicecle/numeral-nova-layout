@@ -13,6 +13,7 @@ import SearchDialog from "./SearchDialog";
 import FavoritesDrawer from "./FavoritesDrawer";
 import AuthDialog from "./AuthDialog";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useCategoryStore } from "@/store/categoryStore";
 
 const navLinks = [
   { name: "Главная", href: "/" },
@@ -36,7 +37,7 @@ export default function Header() {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   
-  const [selectedCategory, setSelectedCategory] = useState<"garden" | "home">("garden");
+  const { selectedCategory, setSelectedCategory } = useCategoryStore();
   
   const handleCategoryChange = (value: "garden" | "home") => {
     setSelectedCategory(value);
@@ -91,10 +92,7 @@ export default function Header() {
 
         {/* Garden/Home Toggle (Desktop) */}
         {!isMobile && (
-          <GardenHomeToggle 
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-          />
+          <GardenHomeToggle />
         )}
 
         {/* Иконки (для десктопа и мобильной версии) */}
@@ -139,10 +137,7 @@ export default function Header() {
       {/* Тумблер сад/дом (мобильная версия - всегда показан) */}
       {isMobile && (
         <div className="px-5 py-3 flex justify-center">
-          <GardenHomeToggle 
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-          />
+          <GardenHomeToggle />
         </div>
       )}
       

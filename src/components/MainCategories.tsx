@@ -1,6 +1,7 @@
 
 import { useNavigate } from "react-router-dom";
 import CategoryCard from "./CategoryCard";
+import { useCategoryStore } from "@/store/categoryStore";
 
 const categories = [
   {
@@ -28,8 +29,14 @@ const categories = [
 
 export default function MainCategories() {
   const navigate = useNavigate();
+  const { selectedCategory, setSelectedCategory } = useCategoryStore();
   
-  const handleCategoryClick = (href: string) => {
+  const handleCategoryClick = (href: string, categoryId: string) => {
+    // For home and garden, set the category in the store
+    if (categoryId === "home" || categoryId === "garden") {
+      setSelectedCategory(categoryId as "home" | "garden");
+    }
+    
     navigate(href);
   };
   
@@ -44,7 +51,7 @@ export default function MainCategories() {
             buttonText={category.buttonText}
             imageUrl={category.imageUrl}
             href={category.href}
-            onClick={() => handleCategoryClick(category.href)}
+            onClick={() => handleCategoryClick(category.href, category.id)}
           />
         ))}
       </div>
