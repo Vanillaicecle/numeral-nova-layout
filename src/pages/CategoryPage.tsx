@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Header from "@/components/Header";
@@ -9,11 +8,10 @@ import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { categories } from "@/components/MainCategories";
-import { seasonalProducts } from "@/components/SeasonalCollection";
 import { Button } from "@/components/ui/button";
+import { useCategoryStore } from "@/store/categoryStore";
 import { Filter, Search } from "lucide-react";
 
-// Полный список товаров (в реальном приложении был бы API запрос)
 const allProducts = [
   // Гостиная
   {
@@ -136,14 +134,12 @@ const allProducts = [
   }
 ];
 
-// Типы товаров для каждой категории
 const productTypes = {
   home: ["sofa", "table", "armchair", "shelf"],
   garden: ["chair", "umbrella", "table", "swing"],
   dacha: ["grill", "hammock", "shed", "pool"]
 };
 
-// Перевод типов товаров
 const typeTranslations: Record<string, string> = {
   sofa: "Диван",
   table: "Стол",
@@ -158,7 +154,6 @@ const typeTranslations: Record<string, string> = {
   pool: "Бассейн",
 };
 
-// Перевод категорий
 const categoryTranslations: Record<string, string> = {
   home: "Мебель для гостиной",
   garden: "Садовая мебель",
@@ -167,13 +162,13 @@ const categoryTranslations: Record<string, string> = {
 
 export default function CategoryPage() {
   const { categoryId } = useParams<{ categoryId: string }>();
+  const { selectedCategory } = useCategoryStore();
   const [filteredProducts, setFilteredProducts] = useState(allProducts);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedType, setSelectedType] = useState("");
   const [priceRange, setPriceRange] = useState([0, 50000]);
   const [maxPrice, setMaxPrice] = useState(50000);
-  
-  // Категория не найдена
+
   if (!categoryId || !["home", "garden", "dacha"].includes(categoryId)) {
     return (
       <div className="min-h-screen flex flex-col bg-white">
@@ -188,59 +183,54 @@ export default function CategoryPage() {
     );
   }
 
-  // Получаем типы товаров для текущей категории
   const categoryTypes = productTypes[categoryId as keyof typeof productTypes] || [];
-  
-  // Категория и её заголовок
+
   const category = categories.find(cat => cat.id === categoryId);
   const categoryTitle = categoryTranslations[categoryId] || category?.title || "Товары";
-  
-  // Инициализация при загрузке и смене категории
+
   useEffect(() => {
-    const productsInCategory = allProducts.filter(product => product.category === categoryId);
-    
-    // Находим максимальную цену в категории для слайдера
+    let productsInCategory = allProducts.filter(product => {
+      if (categoryId === 'home' || categoryId === 'garden') {
+        return product.category === selectedCategory;
+      }
+      return product.category === categoryId;
+    });
+
     const max = Math.max(...productsInCategory.map(p => p.currentPrice));
     setMaxPrice(max);
     setPriceRange([0, max]);
-    
-    // Сбрасываем фильтры
+
     setSelectedType("");
     setSearchTerm("");
-    
+
     setFilteredProducts(productsInCategory);
-  }, [categoryId]);
-  
-  // Применяем фильтры
+  }, [categoryId, selectedCategory]);
+
   const applyFilters = () => {
     let result = allProducts.filter(product => product.category === categoryId);
-    
-    // Фильтр по поисковому запросу (в названии)
+
     if (searchTerm.trim()) {
       result = result.filter(product => 
         product.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-    
-    // Фильтр по типу товара
+
     if (selectedType) {
       result = result.filter(product => product.type === selectedType);
     }
-    
-    // Фильтр по цене
+
     result = result.filter(product => 
       product.currentPrice >= priceRange[0] && 
       product.currentPrice <= priceRange[1]
     );
-    
+
     setFilteredProducts(result);
   };
-  
-  // Применяем фильтры при изменении параметров
+
   useEffect(() => {
     applyFilters();
   }, [searchTerm, selectedType, priceRange]);
-  
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
@@ -248,10 +238,8 @@ export default function CategoryPage() {
         <div className="page-container">
           <h2 className="text-3xl font-bold text-main-gray mb-4 text-center font-playfair">{categoryTitle}</h2>
           
-          {/* Фильтры */}
           <div className="bg-bg-light p-4 md:p-6 rounded-lg mb-8 shadow-sm">
             <div className="flex flex-col lg:flex-row gap-6">
-              {/* Поиск по названию */}
               <div className="flex-1">
                 <Label htmlFor="search" className="mb-2 block">Поиск по названию</Label>
                 <div className="relative">
@@ -266,7 +254,6 @@ export default function CategoryPage() {
                 </div>
               </div>
               
-              {/* Фильтр по типу */}
               <div className="w-full lg:w-1/4">
                 <Label htmlFor="type" className="mb-2 block">Тип товара</Label>
                 <Select value={selectedType} onValueChange={setSelectedType}>
@@ -284,7 +271,6 @@ export default function CategoryPage() {
                 </Select>
               </div>
               
-              {/* Фильтр по цене */}
               <div className="flex-1">
                 <div className="flex justify-between mb-2">
                   <Label htmlFor="price-range">Цена</Label>
@@ -305,7 +291,6 @@ export default function CategoryPage() {
             </div>
           </div>
           
-          {/* Результаты */}
           {filteredProducts.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
               {filteredProducts.map((product) => (

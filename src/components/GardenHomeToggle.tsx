@@ -3,11 +3,7 @@ import React from "react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { TreeDeciduous, Home } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-
-type GardenHomeToggleProps = {
-  value?: "garden" | "home";
-  onChange?: (val: "garden" | "home") => void;
-};
+import { useCategoryStore } from "@/store/categoryStore";
 
 const options = [
   {
@@ -22,24 +18,20 @@ const options = [
   },
 ];
 
-export default function GardenHomeToggle({
-  value = "garden",
-  onChange,
-}: GardenHomeToggleProps) {
-  const [selected, setSelected] = React.useState<"garden" | "home">(value);
+export default function GardenHomeToggle() {
+  const { selectedCategory, setSelectedCategory } = useCategoryStore();
   const isMobile = useIsMobile();
 
   function handleValueChange(val: string) {
     if (val === "garden" || val === "home") {
-      setSelected(val);
-      onChange?.(val);
+      setSelectedCategory(val);
     }
   }
 
   return (
     <ToggleGroup
       type="single"
-      value={selected}
+      value={selectedCategory}
       onValueChange={handleValueChange}
       className={`
         rounded-full p-1 bg-[#F4F4F4] shadow-sm 
@@ -57,7 +49,7 @@ export default function GardenHomeToggle({
             text-base font-medium w-1/2
             transition
             ${
-              selected === option.value
+              selectedCategory === option.value
                 ? "bg-main-green text-white shadow"
                 : "bg-transparent text-[#333] hover:bg-[#e0eee7]"
             }
