@@ -9,27 +9,27 @@ const categories = [
     title: "Уютная мебель для гостиной и кухни",
     buttonText: "Смотреть коллекцию",
     imageUrl: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=800&q=80",
-    href: "/category/home",
+    href: "/catalog?category=home", // Updated to use query parameter
   },
   {
     id: "garden",
     title: "Садовая мебель из натурального дерева",
     buttonText: "Выбрать для дачи",
     imageUrl: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=800&q=80",
-    href: "/category/garden",
+    href: "/catalog?category=garden", // Updated to use query parameter
   },
   {
     id: "dacha",
     title: "Всё необходимое для комфортной дачи",
     buttonText: "Перейти в каталог",
     imageUrl: "https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=800&q=80",
-    href: "/category/dacha",
+    href: "/catalog", // No specific category for dacha
   },
 ];
 
 export default function MainCategories() {
   const navigate = useNavigate();
-  const { selectedCategory, setSelectedCategory } = useCategoryStore();
+  const { setSelectedCategory } = useCategoryStore();
   
   const handleCategoryClick = (href: string, categoryId: string) => {
     // For home and garden, set the category in the store

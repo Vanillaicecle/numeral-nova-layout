@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
@@ -69,12 +70,21 @@ const generateProducts = (): Product[] => {
 const allProducts = generateProducts();
 
 export default function Catalog() {
-  const { selectedCategory } = useCategoryStore();
+  const [searchParams] = useSearchParams();
+  const { selectedCategory, setSelectedCategory } = useCategoryStore();
   const [products, setProducts] = useState<Product[]>(allProducts);
   const [priceRange, setPriceRange] = useState([0, 50000]);
   const [selectedMaterial, setSelectedMaterial] = useState<string>("");
   const [selectedCollection, setSelectedCollection] = useState<string>("");
   const maxPrice = 50000;
+
+  // Initial category setting from URL query parameter
+  useEffect(() => {
+    const categoryParam = searchParams.get('category');
+    if (categoryParam === 'home' || categoryParam === 'garden') {
+      setSelectedCategory(categoryParam);
+    }
+  }, [searchParams, setSelectedCategory]);
 
   useEffect(() => {
     let filtered = allProducts;
@@ -108,6 +118,7 @@ export default function Catalog() {
     setPriceRange([0, maxPrice]);
     setSelectedMaterial("");
     setSelectedCollection("");
+    setSelectedCategory(null);
   };
 
   return (
