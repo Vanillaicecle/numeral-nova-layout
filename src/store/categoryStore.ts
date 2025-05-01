@@ -2,8 +2,8 @@
 import { create } from 'zustand';
 
 type CategoryStore = {
-  selectedCategory: 'garden' | 'home';
-  setSelectedCategory: (category: 'garden' | 'home') => void;
+  selectedCategory: 'garden' | 'home' | null;
+  setSelectedCategory: (category: 'garden' | 'home' | null) => void;
 };
 
 export const useCategoryStore = create<CategoryStore>((set) => ({
