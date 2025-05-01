@@ -19,21 +19,21 @@ const categories = [
     title: "Уютная мебель для гостиной и кухни",
     buttonText: "Смотреть коллекцию",
     imageUrl: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=800&q=80",
-    href: "/catalog?category=home", // Updated to use query parameter
+    href: "/catalog?category=home", // Обновлено для перехода в каталог
   },
   {
     id: "garden",
     title: "Садовая мебель из натурального дерева",
     buttonText: "Выбрать для дачи",
     imageUrl: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=800&q=80",
-    href: "/catalog?category=garden", // Updated to use query parameter
+    href: "/catalog?category=garden", // Обновлено для перехода в каталог
   },
   {
     id: "dacha",
     title: "Всё необходимое для комфортной дачи",
     buttonText: "Перейти в каталог",
     imageUrl: "https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=800&q=80",
-    href: "/catalog", // No specific category for dacha
+    href: "/catalog", // Без категории, просто каталог
   },
 ];
 

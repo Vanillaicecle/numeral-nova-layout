@@ -30,7 +30,7 @@ export default function HeroSection() {
             className="bg-main-green hover:bg-[#21794d] text-white font-semibold text-base md:text-lg px-8 py-3 shadow-lg transition"
             asChild
           >
-            <Link to="/category/home">
+            <Link to="/catalog">
               В каталог
               <ArrowRight size={20} className="ml-2" />
             </Link>
