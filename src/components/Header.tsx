@@ -44,7 +44,7 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full bg-bg-light border-b border-border-gray shadow-soft sticky top-0 z-50">
+    <header className="fixed top-0 left-0 right-0 w-full bg-bg-light border-b border-border-gray shadow-soft z-50">
       <div className="max-w-content mx-auto flex items-center justify-between px-5 py-4 md:py-6">
         {/* Логотип */}
         <div className="flex items-center gap-2 md:gap-3">

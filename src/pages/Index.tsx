@@ -10,7 +10,7 @@ export default function Index() {
   return (
     <div className="min-h-screen flex flex-col bg-white font-roboto">
       <Header />
-      <main className="flex-1 w-full flex flex-col items-center justify-center pt-[50px] md:pt-[30px]">
+      <main className="flex-1 w-full flex flex-col items-center justify-center pt-[100px] md:pt-[120px]">
         <div className="page-container">
           <HeroSection />
           
