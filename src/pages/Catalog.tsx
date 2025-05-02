@@ -74,8 +74,8 @@ export default function Catalog() {
   const { selectedCategory, setSelectedCategory } = useCategoryStore();
   const [products, setProducts] = useState<Product[]>(allProducts);
   const [priceRange, setPriceRange] = useState([0, 50000]);
-  const [selectedMaterial, setSelectedMaterial] = useState<string>("");
-  const [selectedCollection, setSelectedCollection] = useState<string>("");
+  const [selectedMaterial, setSelectedMaterial] = useState<string | null>(null);
+  const [selectedCollection, setSelectedCollection] = useState<string | null>(null);
   const maxPrice = 50000;
 
   // Initial category setting from URL query parameter
@@ -116,8 +116,8 @@ export default function Catalog() {
 
   const resetFilters = () => {
     setPriceRange([0, maxPrice]);
-    setSelectedMaterial("");
-    setSelectedCollection("");
+    setSelectedMaterial(null);
+    setSelectedCollection(null);
     setSelectedCategory(null);
   };
 
@@ -157,12 +157,12 @@ export default function Catalog() {
                 <Label htmlFor="material" className="mb-2 block">
                   Материал
                 </Label>
-                <Select value={selectedMaterial} onValueChange={setSelectedMaterial}>
+                <Select value={selectedMaterial || undefined} onValueChange={setSelectedMaterial}>
                   <SelectTrigger id="material">
                     <SelectValue placeholder="Все материалы" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Все материалы</SelectItem>
+                    <SelectItem value="all">Все материалы</SelectItem>
                     {materials.map((material) => (
                       <SelectItem key={material.value} value={material.value}>
                         {material.label}
@@ -177,12 +177,12 @@ export default function Catalog() {
                 <Label htmlFor="collection" className="mb-2 block">
                   Коллекция
                 </Label>
-                <Select value={selectedCollection} onValueChange={setSelectedCollection}>
+                <Select value={selectedCollection || undefined} onValueChange={setSelectedCollection}>
                   <SelectTrigger id="collection">
                     <SelectValue placeholder="Все коллекции" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Все коллекции</SelectItem>
+                    <SelectItem value="all">Все коллекции</SelectItem>
                     {collections.map((collection) => (
                       <SelectItem key={collection.value} value={collection.value}>
                         {collection.label}

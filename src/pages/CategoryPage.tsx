@@ -165,7 +165,7 @@ export default function CategoryPage() {
   const { selectedCategory } = useCategoryStore();
   const [filteredProducts, setFilteredProducts] = useState(allProducts);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedType, setSelectedType] = useState("");
+  const [selectedType, setSelectedType] = useState<string | null>(null);
   const [priceRange, setPriceRange] = useState([0, 50000]);
   const [maxPrice, setMaxPrice] = useState(50000);
 
@@ -200,7 +200,7 @@ export default function CategoryPage() {
     setMaxPrice(max);
     setPriceRange([0, max]);
 
-    setSelectedType("");
+    setSelectedType(null);
     setSearchTerm("");
 
     setFilteredProducts(productsInCategory);
@@ -256,12 +256,12 @@ export default function CategoryPage() {
               
               <div className="w-full lg:w-1/4">
                 <Label htmlFor="type" className="mb-2 block">Тип товара</Label>
-                <Select value={selectedType} onValueChange={setSelectedType}>
+                <Select value={selectedType || undefined} onValueChange={setSelectedType}>
                   <SelectTrigger id="type">
                     <SelectValue placeholder="Все типы" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Все типы</SelectItem>
+                    <SelectItem value="all">Все типы</SelectItem>
                     {categoryTypes.map(type => (
                       <SelectItem key={type} value={type}>
                         {typeTranslations[type] || type}
@@ -313,7 +313,7 @@ export default function CategoryPage() {
                 className="mt-4"
                 onClick={() => {
                   setSearchTerm("");
-                  setSelectedType("");
+                  setSelectedType(null);
                   setPriceRange([0, maxPrice]);
                 }}
               >
