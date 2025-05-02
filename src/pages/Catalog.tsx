@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
@@ -6,9 +5,9 @@ import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { useCategoryStore } from "@/store/categoryStore";
+import { Input } from "@/components/ui/input";
 
 interface Product {
   id: string;
@@ -308,7 +307,7 @@ const gardenProducts: Product[] = [
   },
   {
     id: "sicilia-sofa-2seat",
-    name: "СИЦИЛИЯ софа 2-х местная",
+    name: "СИЦИЛИЯ софа 2-х мест��ая",
     imageUrl: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80",
     currentPrice: 52635,
     rating: 5,
@@ -449,7 +448,9 @@ export default function Catalog() {
   const [searchParams] = useSearchParams();
   const { selectedCategory, setSelectedCategory } = useCategoryStore();
   const [products, setProducts] = useState<Product[]>(allProducts);
-  const [priceRange, setPriceRange] = useState([0, 150000]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 150000]);
+  const [minPriceInput, setMinPriceInput] = useState(priceRange[0].toString());
+  const [maxPriceInput, setMaxPriceInput] = useState(priceRange[1].toString());
   const [selectedMaterial, setSelectedMaterial] = useState<string | null>(null);
   const [selectedCollection, setSelectedCollection] = useState<string | null>(null);
   const maxPrice = 150000;
@@ -490,8 +491,16 @@ export default function Catalog() {
     setProducts(filtered);
   }, [selectedCategory, priceRange, selectedMaterial, selectedCollection]);
 
+  const handlePriceChange = () => {
+    const minPrice = Math.max(0, parseInt(minPriceInput) || 0);
+    const maxPrice = Math.max(minPrice, parseInt(maxPriceInput) || 150000);
+    setPriceRange([minPrice, maxPrice]);
+  };
+
   const resetFilters = () => {
     setPriceRange([0, maxPrice]);
+    setMinPriceInput("0");
+    setMaxPriceInput(maxPrice.toString());
     setSelectedMaterial(null);
     setSelectedCollection(null);
     setSelectedCategory(null);
@@ -511,26 +520,39 @@ export default function Catalog() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Фильтр по цене */}
               <div className="flex-1">
-                <div className="flex justify-between mb-2">
-                  <Label htmlFor="price-range">Цена</Label>
-                  <span className="text-sm text-secondary-gray">
-                    {priceRange[0].toLocaleString()} ₽ - {priceRange[1].toLocaleString()} ₽
-                  </span>
+                <Label htmlFor="price-range" className="mb-2 block font-medium">Цена</Label>
+                <div className="flex items-center gap-2">
+                  <div className="w-full">
+                    <Input
+                      id="min-price"
+                      type="number"
+                      min="0"
+                      placeholder="от"
+                      value={minPriceInput}
+                      onChange={(e) => setMinPriceInput(e.target.value)}
+                      onBlur={handlePriceChange}
+                      className="border-border-gray text-main-gray"
+                    />
+                  </div>
+                  <span className="text-secondary-gray">—</span>
+                  <div className="w-full">
+                    <Input
+                      id="max-price"
+                      type="number"
+                      min="0"
+                      placeholder="до"
+                      value={maxPriceInput}
+                      onChange={(e) => setMaxPriceInput(e.target.value)}
+                      onBlur={handlePriceChange}
+                      className="border-border-gray text-main-gray"
+                    />
+                  </div>
                 </div>
-                <Slider
-                  id="price-range"
-                  defaultValue={[0, maxPrice]}
-                  max={maxPrice}
-                  step={1000}
-                  value={priceRange}
-                  onValueChange={setPriceRange}
-                  className="my-4"
-                />
               </div>
 
               {/* Фильтр по материалу */}
               <div>
-                <Label htmlFor="material" className="mb-2 block">
+                <Label htmlFor="material" className="mb-2 block font-medium">
                   Материал
                 </Label>
                 <Select value={selectedMaterial || undefined} onValueChange={setSelectedMaterial}>
@@ -550,7 +572,7 @@ export default function Catalog() {
 
               {/* Фильтр по коллекции */}
               <div>
-                <Label htmlFor="collection" className="mb-2 block">
+                <Label htmlFor="collection" className="mb-2 block font-medium">
                   Коллекция
                 </Label>
                 <Select value={selectedCollection || undefined} onValueChange={setSelectedCollection}>
