@@ -10,6 +10,7 @@ interface ProductCardProps {
   currentPrice: number;
   oldPrice?: number;
   rating: number;
+  description?: string;
 }
 
 export default function ProductCard({

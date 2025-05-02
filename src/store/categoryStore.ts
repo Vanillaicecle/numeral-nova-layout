@@ -7,6 +7,6 @@ type CategoryStore = {
 };
 
 export const useCategoryStore = create<CategoryStore>((set) => ({
-  selectedCategory: 'garden',
+  selectedCategory: null,
   setSelectedCategory: (category) => set({ selectedCategory: category }),
 }));
