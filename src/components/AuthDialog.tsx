@@ -1,12 +1,13 @@
 
 import { useState } from "react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { VisuallyHidden } from "@/components/ui/visually-hidden";
 
 interface AuthDialogProps {
   open: boolean;
@@ -60,7 +61,13 @@ export default function AuthDialog({ open, onOpenChange }: AuthDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[450px] p-0 overflow-hidden">
+      <DialogContent className="sm:max-w-[450px] p-0 overflow-hidden bg-white">
+        <VisuallyHidden>
+          <DialogTitle>
+            {activeTab === "login" ? "Вход в аккаунт" : "Регистрация аккаунта"}
+          </DialogTitle>
+        </VisuallyHidden>
+        
         <Tabs
           defaultValue="login"
           value={activeTab}
