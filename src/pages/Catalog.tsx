@@ -615,6 +615,10 @@ export default function Catalog() {
                   currentPrice={product.currentPrice}
                   oldPrice={product.oldPrice}
                   rating={product.rating}
+                  description={product.description}
+                  material={product.material}
+                  collection={product.collection}
+                  type={product.type}
                 />
               ))}
             </div>

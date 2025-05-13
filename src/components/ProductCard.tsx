@@ -2,6 +2,8 @@
 import { Star, ShoppingCart } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import ProductDetailDialog from "./ProductDetailDialog";
 
 interface ProductCardProps {
   id: string;
@@ -11,6 +13,9 @@ interface ProductCardProps {
   oldPrice?: number;
   rating: number;
   description?: string;
+  material?: string;
+  collection?: string;
+  type?: string;
 }
 
 export default function ProductCard({
@@ -21,7 +26,12 @@ export default function ProductCard({
   oldPrice,
   rating,
   description,
+  material,
+  collection,
+  type,
 }: ProductCardProps) {
+  const [showDetails, setShowDetails] = useState(false);
+  
   const formatPrice = (price: number) => {
     return price.toLocaleString("ru-RU") + " ₽";
   };
@@ -38,7 +48,8 @@ export default function ProductCard({
       ));
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent opening product detail when clicking the button
     console.log(`Added product ${id} to cart`);
     // Implement cart functionality here
   };
@@ -67,39 +78,61 @@ export default function ProductCard({
   const displayImage = imageUrl || getFallbackImage();
 
   return (
-    <Card className="overflow-hidden border border-border-gray hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
-      <div
-        className="aspect-square w-full bg-cover bg-center"
-        style={{ backgroundImage: `url(${displayImage})` }}
-      />
-      <CardContent className="flex flex-col p-4 flex-grow">
-        <h3 className="text-lg font-medium text-main-gray mb-2 line-clamp-2 h-12">{name}</h3>
-        
-        <div className="flex items-center mb-3">
-          {renderStars(rating)}
-        </div>
-        
-        {description && (
-          <p className="text-sm text-secondary-gray mb-3 line-clamp-2">{description}</p>
-        )}
-        
-        <div className="flex items-center mb-4 mt-auto">
-          <span className="text-lg font-bold text-main-gray">{formatPrice(currentPrice)}</span>
-          {oldPrice && (
-            <span className="ml-2 text-sm text-secondary-gray line-through">
-              {formatPrice(oldPrice)}
-            </span>
+    <>
+      <Card 
+        className="overflow-hidden border border-border-gray hover:shadow-lg transition-shadow duration-300 h-full flex flex-col cursor-pointer"
+        onClick={() => setShowDetails(true)}
+      >
+        <div
+          className="aspect-square w-full bg-cover bg-center"
+          style={{ backgroundImage: `url(${displayImage})` }}
+        />
+        <CardContent className="flex flex-col p-4 flex-grow">
+          <h3 className="text-lg font-medium text-main-gray mb-2 line-clamp-2 h-12">{name}</h3>
+          
+          <div className="flex items-center mb-3">
+            {renderStars(rating)}
+          </div>
+          
+          {description && (
+            <p className="text-sm text-secondary-gray mb-3 line-clamp-2">{description}</p>
           )}
-        </div>
-        
-        <Button
-          onClick={handleAddToCart}
-          className="w-full bg-main-green hover:bg-[#21794d] text-white"
-        >
-          <ShoppingCart size={18} className="mr-2" />
-          В корзину
-        </Button>
-      </CardContent>
-    </Card>
+          
+          <div className="flex items-center mb-4 mt-auto">
+            <span className="text-lg font-bold text-main-gray">{formatPrice(currentPrice)}</span>
+            {oldPrice && (
+              <span className="ml-2 text-sm text-secondary-gray line-through">
+                {formatPrice(oldPrice)}
+              </span>
+            )}
+          </div>
+          
+          <Button
+            onClick={handleAddToCart}
+            className="w-full bg-main-green hover:bg-[#21794d] text-white"
+          >
+            <ShoppingCart size={18} className="mr-2" />
+            В корзину
+          </Button>
+        </CardContent>
+      </Card>
+
+      <ProductDetailDialog 
+        open={showDetails}
+        onOpenChange={setShowDetails}
+        product={{
+          id,
+          name,
+          imageUrl: displayImage,
+          currentPrice,
+          oldPrice,
+          rating,
+          description,
+          material,
+          collection,
+          type
+        }}
+      />
+    </>
   );
 }

@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 
 interface CategoryCardProps {
   title: string;
@@ -26,13 +27,15 @@ export default function CategoryCard({
       />
       <CardContent className="flex flex-col justify-between p-5 flex-grow">
         <h3 className="text-xl font-playfair font-bold text-main-gray mb-4">{title}</h3>
-        <Button 
-          onClick={onClick}
-          className="inline-flex items-center justify-between gap-2 whitespace-nowrap rounded-md bg-main-green hover:bg-[#21794d] text-white w-full h-10 px-4 py-2 text-sm font-medium transition-colors"
-        >
-          {buttonText}
-          <ChevronRight size={18} />
-        </Button>
+        <Link to={href}>
+          <Button 
+            onClick={onClick}
+            className="inline-flex items-center justify-between gap-2 whitespace-nowrap rounded-md bg-main-green hover:bg-[#21794d] text-white w-full h-10 px-4 py-2 text-sm font-medium transition-colors"
+          >
+            {buttonText}
+            <ChevronRight size={18} />
+          </Button>
+        </Link>
       </CardContent>
     </Card>
   );
