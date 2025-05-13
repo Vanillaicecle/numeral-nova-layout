@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -22,7 +23,6 @@ const navLinks = [
     submenu: [
       { label: "Дом", href: "/catalog?category=home" }, // Обновлено для использования query параметра
       { label: "Сад", href: "/catalog?category=garden" }, // Обновлено для использования query параметра
-      { label: "Дача", href: "/catalog" }, // Просто каталог без категории
     ],
   },
   { name: "О нас", href: "/about" },

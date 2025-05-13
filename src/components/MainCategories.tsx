@@ -28,13 +28,6 @@ const categories = [
     imageUrl: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=800&q=80",
     href: "/catalog?category=garden", // Обновлено для перехода в каталог
   },
-  {
-    id: "dacha",
-    title: "Всё необходимое для комфортной дачи",
-    buttonText: "Перейти в каталог",
-    imageUrl: "https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=800&q=80",
-    href: "/catalog", // Без категории, просто каталог
-  },
 ];
 
 // Sample products for demonstration
@@ -166,7 +159,7 @@ export default function MainCategories() {
       </div>
       
       {/* Regular category cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-6">
         {categories.map((category) => (
           <CategoryCard
             key={category.id}
