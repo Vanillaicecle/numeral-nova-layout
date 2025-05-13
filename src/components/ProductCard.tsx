@@ -77,10 +77,28 @@ export default function ProductCard({
   // Use provided image URL or fallback
   const displayImage = imageUrl || getFallbackImage();
 
+  // Determine background color based on collection
+  const getBackgroundColor = () => {
+    switch(collection) {
+      case 'karelia':
+        return 'bg-block-blue/30';
+      case 'ritsa':
+        return 'bg-block-green/30';
+      case 'seliger':
+        return 'bg-amber-50';
+      case 'sicilia':
+        return 'bg-rose-50';
+      case 'korfu':
+        return 'bg-indigo-50';
+      default:
+        return 'bg-slate-50';
+    }
+  };
+
   return (
     <>
       <Card 
-        className="overflow-hidden border border-border-gray hover:shadow-lg transition-shadow duration-300 h-full flex flex-col cursor-pointer"
+        className={`overflow-hidden border border-border-gray hover:shadow-lg transition-all duration-300 h-full flex flex-col cursor-pointer ${getBackgroundColor()}`}
         onClick={() => setShowDetails(true)}
       >
         <div
