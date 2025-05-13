@@ -18,12 +18,9 @@ export default function HeroSection() {
       }}
     >
       <div className="relative z-10 flex flex-col items-center text-center px-6 py-12 w-full">
-        <h1 className="font-playfair font-bold text-gray-900 text-3xl md:text-5xl lg:text-6xl mb-4 drop-shadow-lg">
+        <h1 className="font-playfair font-bold text-gray-900 text-3xl md:text-5xl lg:text-6xl mb-8 drop-shadow-lg">
           Создайте уют в каждом уголке вашего дома и сада
         </h1>
-        <p className="text-lg md:text-2xl text-gray-700 font-medium mb-8 drop-shadow-md">
-          Экологичная мебель ручной работы с гарантией 5 лет
-        </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button
             size="lg"
