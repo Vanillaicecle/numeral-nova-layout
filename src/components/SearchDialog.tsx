@@ -1,9 +1,10 @@
 
 import { useState } from "react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Search, X } from "lucide-react";
+import { Search } from "lucide-react";
 import { Button } from "./ui/button";
+import { VisuallyHidden } from "@/components/ui/visually-hidden";
 
 interface SearchDialogProps {
   open: boolean;
@@ -23,17 +24,13 @@ export default function SearchDialog({ open, onOpenChange }: SearchDialogProps) 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[600px] p-0 overflow-hidden">
-        <div className="bg-white p-4 rounded-lg">
+      <DialogContent className="sm:max-w-[600px] p-0 overflow-hidden bg-white">
+        <DialogTitle>
+          <VisuallyHidden>Поиск товаров</VisuallyHidden>
+        </DialogTitle>
+        <div className="p-4 rounded-lg">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-main-gray">Поиск товаров</h2>
-            <Button 
-              variant="ghost" 
-              className="h-8 w-8 p-0" 
-              onClick={() => onOpenChange(false)}
-            >
-              <X className="h-5 w-5" />
-            </Button>
           </div>
           
           <form onSubmit={handleSearch} className="space-y-4">
