@@ -83,14 +83,14 @@ export default function ProductDetailDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[900px] max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[900px] max-h-[90vh] overflow-y-auto bg-gradient-to-br from-white to-gray-100 border border-gray-200">
         <DialogTitle className="text-2xl font-bold text-main-gray font-playfair">
           {product.name}
         </DialogTitle>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
           {/* Product Image */}
-          <div className="aspect-square bg-cover bg-center rounded-md overflow-hidden" 
+          <div className="aspect-square bg-cover bg-center rounded-md overflow-hidden shadow-md" 
                style={{ backgroundImage: `url(${product.imageUrl})` }} />
           
           {/* Product Details */}
@@ -150,7 +150,7 @@ export default function ProductDetailDialog({
             {/* Add to Cart Button */}
             <Button
               onClick={handleAddToCart}
-              className="w-full bg-main-green hover:bg-[#21794d] text-white mt-auto h-12 text-lg"
+              className="w-full bg-main-green hover:bg-[#21794d] text-white mt-auto h-12 text-lg rounded-md"
             >
               <ShoppingCart size={20} className="mr-2" />
               В корзину
