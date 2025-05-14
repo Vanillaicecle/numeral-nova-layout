@@ -1,5 +1,5 @@
 
-import { Star, ShoppingCart } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -36,17 +36,7 @@ export default function ProductCard({
     return price.toLocaleString("ru-RU") + " ₽";
   };
 
-  const renderStars = (rating: number) => {
-    return Array(5)
-      .fill(0)
-      .map((_, i) => (
-        <Star
-          key={i}
-          size={16}
-          className={i < rating ? "text-yellow-500 fill-yellow-500" : "text-gray-300"}
-        />
-      ));
-  };
+  // Removed the renderStars function as it's no longer needed
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent opening product detail when clicking the button
@@ -90,9 +80,7 @@ export default function ProductCard({
         <CardContent className="flex flex-col p-4 flex-grow">
           <h3 className="text-lg font-medium text-main-gray mb-2 line-clamp-2 h-12">{name}</h3>
           
-          <div className="flex items-center mb-3">
-            {renderStars(rating)}
-          </div>
+          {/* Removed the star rating section */}
           
           {description && (
             <p className="text-sm text-secondary-gray mb-3 line-clamp-2">{description}</p>
