@@ -159,12 +159,13 @@ export default function ContactPage() {
             </div>
           </div>
           
-          {/* Карта (заглушка) */}
-          <div className="rounded-lg overflow-hidden shadow-md bg-bg-light h-[400px] flex items-center justify-center">
-            <p className="text-secondary-gray text-center p-4">
-              Здесь будет интерактивная карта с расположением магазина.<br />
-              (В реальном приложении здесь была бы интеграция с картой)
-            </p>
+          {/* Yandex карта */}
+          <div className="rounded-lg overflow-hidden shadow-md bg-bg-light h-[400px]">
+            <img 
+              src="https://static-maps.yandex.ru/v1?ll=41.533528%2C46.472890&z=18&l=map&size=650,400&pt=41.533528,46.472890,pm2rdm" 
+              alt="Карта с расположением магазина" 
+              className="w-full h-full object-cover" 
+            />
           </div>
         </div>
       </main>
