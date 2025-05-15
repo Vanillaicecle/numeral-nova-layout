@@ -1,5 +1,5 @@
 
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, MessageSquare } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -59,30 +59,30 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Колонка 3: Соцсети */}
+          {/* Колонка 3: Соцсети - Заменены на Telegram и WhatsApp */}
           <div>
             <h3 className="text-lg font-playfair font-semibold text-main-gray mb-4">Мы в соцсетях</h3>
             <div className="flex gap-4">
               <a 
-                href="#" 
+                href="https://t.me/your_telegram" 
                 className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-secondary-gray hover:bg-main-green hover:text-white transition-colors"
-                aria-label="Facebook"
+                aria-label="Telegram"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <Facebook size={20} />
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-send">
+                  <path d="m22 2-7 20-4-9-9-4Z"/>
+                  <path d="M22 2 11 13"/>
+                </svg>
               </a>
               <a 
-                href="#" 
+                href="https://wa.me/79281668575" 
                 className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-secondary-gray hover:bg-main-green hover:text-white transition-colors"
-                aria-label="Instagram"
+                aria-label="WhatsApp"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <Instagram size={20} />
-              </a>
-              <a 
-                href="#" 
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-secondary-gray hover:bg-main-green hover:text-white transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={20} />
+                <MessageSquare size={20} />
               </a>
             </div>
             <p className="mt-4 text-sm text-secondary-gray">
