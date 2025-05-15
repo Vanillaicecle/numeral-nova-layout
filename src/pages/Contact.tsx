@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -63,7 +62,7 @@ export default function ContactPage() {
                   <Navigation className="text-main-green mt-1 flex-shrink-0" size={22} />
                   <div>
                     <h3 className="font-semibold text-lg">Адрес</h3>
-                    <p>г. Москва, ул. Мебельная, 123</p>
+                    <p>г. Сальск, ул. Коломийцева, 54</p>
                     <p>Время работы: 9:00 - 21:00 без выходных</p>
                   </div>
                 </div>
@@ -72,8 +71,7 @@ export default function ContactPage() {
                   <Contact className="text-main-green mt-1 flex-shrink-0" size={22} />
                   <div>
                     <h3 className="font-semibold text-lg">Телефон</h3>
-                    <p>+7 (495) 123-45-67</p>
-                    <p>+7 (800) 555-12-34 (бесплатно по России)</p>
+                    <p>+7 (928) 166-85-75</p>
                   </div>
                 </div>
                 
@@ -81,8 +79,7 @@ export default function ContactPage() {
                   <InfoIcon className="text-main-green mt-1 flex-shrink-0" size={22} />
                   <div>
                     <h3 className="font-semibold text-lg">Email</h3>
-                    <p>info@debut-mebel.ru</p>
-                    <p>support@debut-mebel.ru</p>
+                    <p>evgeniya-3-01@yandex.ru</p>
                   </div>
                 </div>
               </div>

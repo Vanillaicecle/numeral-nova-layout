@@ -41,19 +41,19 @@ export default function Footer() {
               <li className="flex items-start gap-2">
                 <MapPin size={18} className="text-main-green flex-shrink-0 mt-1" />
                 <span className="text-secondary-gray">
-                  г. Москва, ул. Лесная, д. 7, офис 203
+                  г. Сальск, ул. Коломийцева, д. 54
                 </span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone size={18} className="text-main-green flex-shrink-0" />
-                <a href="tel:+74951234567" className="text-secondary-gray hover:text-main-green transition-colors">
-                  +7 (495) 123-45-67
+                <a href="tel:+79281668575" className="text-secondary-gray hover:text-main-green transition-colors">
+                  +7 (928) 166-85-75
                 </a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail size={18} className="text-main-green flex-shrink-0" />
-                <a href="mailto:info@numeralnova.ru" className="text-secondary-gray hover:text-main-green transition-colors">
-                  info@numeralnova.ru
+                <a href="mailto:evgeniya-3-01@yandex.ru" className="text-secondary-gray hover:text-main-green transition-colors">
+                  evgeniya-3-01@yandex.ru
                 </a>
               </li>
             </ul>
