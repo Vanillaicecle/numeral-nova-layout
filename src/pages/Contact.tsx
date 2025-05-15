@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -63,7 +64,9 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-lg">Адрес</h3>
                     <p>г. Сальск, ул. Коломийцева, 54</p>
-                    <p>Время работы: 9:00 - 21:00 без выходных</p>
+                    <p className="mt-2 font-semibold">График работы:</p>
+                    <p>Понедельник-Пятница: 09:00–18:00</p>
+                    <p>Суббота-Воскресенье: 08:00–16:00</p>
                   </div>
                 </div>
                 
